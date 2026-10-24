@@ -3,7 +3,7 @@
 | Bölüm | Karar | Not |
 |---|---|---|
 | MCU | ESP32-S3-WROOM-1 **N16R8** | 16MB flash, 8MB PSRAM, native USB. Prototipte aynı modülü taşıyan DevKitC-1 N16R8. |
-| Ekran | 2.8" IPS, 320x240, ST7789V, SPI | Çıplak FPC panel; prototipte FPC-to-DIP adaptörle. Datasheet'i olan panel alınacak. |
+| Ekran | 2.8" IPS, 320x240, ST7789, SPI | Türkiye'den pin header'lı modül; PCB'ye dişi header ile takılır (~3-5 mm ek kalınlık). İleride çıplak FPC panel seçeneği. |
 | Batarya | 18650, 3000-3500 mAh, tırnaklı (puntalı) | Samsung 35E / LG MJ1 / Panasonic NCR18650B / Samsung 30Q. Orijinal hücre. |
 | Şarj | TI BQ24074 | NTC, güvenlik zamanlayıcısı, power path. Şarj akımı 1A. |
 | Batarya koruması | DW01A + FS8205A (PCB üzerinde) | Aşırı şarj, aşırı deşarj, kısa devre. |

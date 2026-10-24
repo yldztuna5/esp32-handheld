@@ -21,7 +21,7 @@
 ## Belgeler
 - [Donanım kararları](docs/hardware.md)
 - [Güç ve batarya güvenliği](docs/power-safety.md)
-- [Prototip parça listesi](docs/prototype-parts.md)
+- [Parça listesi](docs/parts.md)
 
 ## Yol haritası
 - [x] Gereksinimler ve temel parça kararları
