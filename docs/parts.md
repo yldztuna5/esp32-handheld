@@ -16,18 +16,18 @@ Tüm alışveriş Türkiye'den (2026 itibarıyla yurt dışı gönderilerde güm
 |---|---|---|---|---|
 | [Waveshare Pico-ResTouch-LCD-2.8](https://www.robotistan.com/28inch-touch-display-module-for-raspberry-pi-pico-262k-colors-320240-spi) | 1 | 963,42 TL | Evet | 2.8" IPS, 320x240, ST7789, SPI. Kartta microSD yuvası, rezistif dokunmatik (XPT2046) ve arka ışık transistörü var. [Wiki](https://www.waveshare.com/wiki/Pico-ResTouch-LCD-2.8), [şema](https://files.waveshare.com/upload/d/dc/Pico-ResTouch-LCD-2.8_Sch.pdf). Sipariş anında stokta 1 adet vardı. |
 
-### Direnc.net (~1.080 TL + kargo)
+### Direnc.net (~870 TL + kargo; yedek hoparlörle ~1.080 TL)
 | Parça | Adet | Fiyat | Final mi? | Not |
 |---|---|---|---|---|
 | [ESP32 S3 N16R8 WiFi Bluetooth Board](https://www.direnc.net/esp32-s3-n16r8-wifi-bluetooth-board) | 1 | 610,23 TL | Geliştirme kartı | Üzerinde ESP32-S3-WROOM-1-N16R8; PCB'deki modülle aynı (aynı kod, aynı pinler). |
-| [Mini Oval Hoparlör 8Ω 1W](https://www.direnc.net/mini-oval-hoparlor-8ohm-1w) | 2 (1 yedek) | 209,66 TL/adet | Evet | 30x20x5 mm, Molex 1.25 mm konnektörlü. |
+| [Mini Oval Hoparlör 8Ω 1W](https://www.direnc.net/mini-oval-hoparlor-8ohm-1w) | 1 (yedek isteğe bağlı) | 209,66 TL/adet | Evet | 30x20x5 mm, Molex 1.25 mm konnektörlü. |
 | [6x6 5mm Tact Buton (4 bacak)](https://www.direnc.net/6x6-4mm-tach-buton--4-bacak) | 10 | 1,51 TL/adet | Evet | |
 | [6x6 7mm Tact Buton (4 bacak)](https://www.direnc.net/6x6-9mm-tach-buton--4-bacak) | 10 | 3,60 TL/adet | Evet | Yükseklik kasa tasarımında seçilecek. |
 
 ### Trendyol
 | Parça | Adet | Fiyat | Final mi? | Not |
 |---|---|---|---|---|
-| MAX98357 I2S amfi modülü, ör. [ROBİZ](https://www.trendyol.com/robiz/max98357-i2s-5v-3w-ses-yukseltici-amfi-class-d-dijital-ses-muzik-kuvvetlendirici-amfilikator-dac-p-406603487) | 1 | ~270-310 TL | Hayır (test) | ESP32-S3'te DAC yok, I2S amfi şart. Finalde çip PCB'de. |
+| MAX98357 I2S amfi modülü, ör. [ROBİZ](https://www.trendyol.com/robiz/max98357-i2s-5v-3w-ses-yukseltici-amfi-class-d-dijital-ses-muzik-kuvvetlendirici-amfilikator-dac-p-406603487) | 1 | ~270-310 TL | Evet | ESP32-S3'te DAC yok, I2S amfi şart. Modül finalde kısa pinlerle PCB'ye lehimlenir. |
 | [PS4 Analog Motoru x2 (POPKONSOL)](https://www.trendyol.com/popkonsol/ps4-analog-motoru-tum-playstation-4-kollarina-uyumlu-turuncu-seri-kaliteli-ps4-yedek-parca-x2-adet-p-127921128) | 1 paket | Kontrol edilmedi | Evet | 3D analog, bacakları doğrudan PCB'ye lehimlenir. PSP joystick Türkiye'de bulunamadı. |
 | [PS4 Analog Topuz (POPKONSOL)](https://www.trendyol.com/popkonsol/2-adet-ps4-analog-topuz-orjinal-yedek-parca-ps-v1-v2-tum-ps4-kollara-uyumlu-ps4-analog-thumb-stick-p-194605501) | 1 paket | Kontrol edilmedi | Evet | |
 
@@ -76,7 +76,7 @@ Parça numaraları KiCad aşamasında JLCPCB/LCSC stok durumuna göre kesinleşe
 | Parça | Not |
 |---|---|
 | 2x 1x20 erkek pin header (Pico düzeni) | Ekran kartı üstüne takılır; sadece gereken pinler bağlanır. |
-| MAX98357A çipi | I2S amfi; SD pini ESP32'ye bağlı |
+| MAX98357 modülü için pin delikleri | Prototipteki modül lehimlenir; SD pini ESP32'ye bağlı |
 | Molex 1.25 mm (PicoBlade) 2 pin konnektör | Hoparlör |
 | PS4 analog joystick footprint | Doğrudan lehim |
 | 4x 6x6 tact switch | A, B, Start, Select |
