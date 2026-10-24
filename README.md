@@ -22,10 +22,11 @@
 - [Donanım kararları](docs/hardware.md)
 - [Güç ve batarya güvenliği](docs/power-safety.md)
 - [Parça listesi](docs/parts.md)
+- [Pin planı](docs/pinout.md)
 
 ## Yol haritası
 - [x] Gereksinimler ve temel parça kararları
-- [ ] Pin planı
+- [x] Pin planı
 - [ ] Prototip parçalarını sipariş et
 - [ ] Breadboard: ESP32-S3 + ekran + butonlar + joystick + ses
 - [ ] Firmware: launcher iskeleti ve ilk uygulama

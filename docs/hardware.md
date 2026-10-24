@@ -10,11 +10,13 @@
 | USB girişi | USB-C, CC'lerde 2x 5.1k, PTC sigorta, TVS | 5.1k dirençler olmadan C-to-C şarj çalışmaz. |
 | Regülatör | TPS63020 buck-boost, 3.3V | Bataryanın tamamını kullanır, ses tepe akımlarını karşılar. |
 | Pil göstergesi | MAX17048 (I2C) | Doğru yüzde, düşük pilde kayıt + kapanma. |
-| Ses | MAX98357 modülü (I2S) + 8Ω 1W mini oval hoparlör (30x20x5 mm) | Prototipteki modül finalde kısa pinlerle PCB'ye lehimlenir (çip ayrıca dizdirilmez). Hoparlör Molex 1.25 mm konnektörle bağlanır. SD pini ESP32'ye bağlı, sessizken amfi kapalı. |
-| Depolama | microSD (SPI) | Ekran kartının üzerindeki yuva; ekranla aynı SPI hattı, ayrı CS. |
-| Kontroller | PS4 tipi 3D analog joystick + A, B, Start, Select (6x6 tact) | Joystick ADC1 pinlerine (GPIO1-10). Joystick basma = menü. PSP joystick Türkiye'de bulunamadı. |
+| Ses | PAM8403 modülü (analog, class-D) + 8Ω 1.5W hoparlör (20x30 mm) | ESP32-S3'te DAC yok: tek pinden PDM çıkışı, RC filtre ile analoğa çevrilir. Modül finalde pin deliklerinden PCB'ye lehimlenir. Beslemesi P-MOSFET ile kesilir (sessizken akım sıfır). Hoparlör L+ ve L- arasına bağlanır, GND'ye asla. MAX98357'ye göre biraz cızırtılı ama yarı fiyatından ucuz. |
+| Depolama | microSD (SDMMC, 1-bit) | Ekran kartının üzerindeki yuva. LCD ile aynı SPI hattında değil; kendi SDIO pinleri var (bkz. [pin planı](pinout.md)). |
+| Kontroller | PS2 tipi analog joystick (XY joystick modülünden) + A, B, Start, Select (6x6 tact) | Joystick ADC1 pinlerine (GPIO1-2). Joystick basma = menü. PCB'de çıplak joystick footprint'i var: yedek modülden sökülüp lehimlenir. Ucuz potansiyometreler için yazılımda merkez kalibrasyonu ve ölü bölge. |
 | Güç anahtarı | Gerçek açma/kapama anahtarı | Kapalıyken akım çekmez. |
 | Kasa | PETG veya ASA | PLA değil (55-60°C'de yumuşar). Altta batarya çıkıntısı, gövde ~20 mm. |
+| Ekran koruması | 1-1,5 mm şeffaf akrilik lens + koruyucu film | Lens kasaya oturur, ekrana değmez (0,3-0,5 mm boşluk). Ekran kartı köpük conta üstünde, 4 köşeden M2 vidayla kasaya bağlı. Ön çerçeve ekrandan yüksek. |
+| Buton hissi | Prototipte tact switch; finalde kapak + silikon katman | Gerçek konsol tipi silikon zar Türkiye'de bulunamadı; PCB'ye ileride karbon pad seçeneği eklenebilir. |
 
 ## Yazılım
 - PlatformIO + Arduino framework
