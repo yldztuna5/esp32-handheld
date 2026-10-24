@@ -1,37 +1,43 @@
 # Parça listesi
 
 Üç grup var:
-1. **Önden alınacak final parçalar:** Prototipte kullanılır, sonra aynen PCB'ye takılır veya bağlanır.
-2. **Sadece geliştirme/test için:** Ucuz araçlar; PCB'ye girmez.
-3. **PCB'ye dahil edilecekler:** JLCPCB (veya yerli dizgi firması) tarafından karta lehimlenir; şimdi alınmaz.
+1. **Prototip siparişi:** Şimdi alınacaklar. Çoğu final parça; prototipte kullanılır, sonra aynen PCB'ye takılır veya bağlanır.
+2. **PCB'ye dahil edilecekler:** JLCPCB (veya yerli dizgi firması) tarafından karta lehimlenir; şimdi alınmaz.
+3. **PCB aşamasında ayrıca alınacaklar.**
 
-Tüm alışveriş Türkiye'den yapılacak (2026 itibarıyla yurt dışı gönderilerde muafiyet yok).
+Tüm alışveriş Türkiye'den (2026 itibarıyla yurt dışı gönderilerde gümrük muafiyeti yok). Fiyatlar KDV dahil, Ekim 2026'da sitelerden alındı; değişebilir.
 
 ---
 
-## 1. Önden alınacak final parçalar
+## 1. Prototip siparişi
 
-| Parça | Adet | Ne aranmalı | PCB'ye nasıl geçer | Dikkat |
+### Robotistan (963,42 TL)
+| Parça | Adet | Fiyat | Final mi? | Not |
 |---|---|---|---|---|
-| 2.8" IPS ekran modülü | 1 (+1 yedek) | "2.8 IPS ST7789 SPI 240x320" | 2.54 mm dişi header ile PCB'ye takılır | İlanda **IPS** ve **ST7789** yazmalı. Dokunmatiksiz olanı al. Pin sırasının fotoğrafını sakla. |
-| PSP analog joystick | 2 | "PSP 3000 analog" veya "PSP 1000 analog" yedek parça | Kendi FPC ucu PCB'deki FPC konnektörüne takılır | İkisi de aynı modelden olsun. Model bilgisini not et. |
-| Tact switch 6x6 mm, 4 bacaklı (THT) | 10-20 | "6x6 tact switch" | Aynen PCB'ye lehimlenir | Farklı yüksekliklerden (5, 7, 9 mm) birkaç tane al, kasa tasarımında seçeriz. |
-| Kutulu mikro hoparlör 8Ω (veya 4Ω), ~1W | 2 | "mikro hoparlör kutulu 8 ohm 1W" | Kablosu JST-PH ile PCB'ye bağlanır | Kablolu olsun. İnce (~5 mm) olanı tercih et. |
-| JST-PH 2.0 mm 2 pin kablolu soket seti | 1 set | "JST PH 2.0 2 pin kablolu" | Hoparlör ve batarya bağlantısı | Erkek/dişi eşleşen set al. |
+| [Waveshare Pico-ResTouch-LCD-2.8](https://www.robotistan.com/28inch-touch-display-module-for-raspberry-pi-pico-262k-colors-320240-spi) | 1 | 963,42 TL | Evet | 2.8" IPS, 320x240, ST7789, SPI. Kartta microSD yuvası, rezistif dokunmatik (XPT2046) ve arka ışık transistörü var. [Wiki](https://www.waveshare.com/wiki/Pico-ResTouch-LCD-2.8), [şema](https://files.waveshare.com/upload/d/dc/Pico-ResTouch-LCD-2.8_Sch.pdf). Sipariş anında stokta 1 adet vardı. |
 
-## 2. Sadece geliştirme/test için
+### Direnc.net (~1.080 TL + kargo)
+| Parça | Adet | Fiyat | Final mi? | Not |
+|---|---|---|---|---|
+| [ESP32 S3 N16R8 WiFi Bluetooth Board](https://www.direnc.net/esp32-s3-n16r8-wifi-bluetooth-board) | 1 | 610,23 TL | Geliştirme kartı | Üzerinde ESP32-S3-WROOM-1-N16R8; PCB'deki modülle aynı (aynı kod, aynı pinler). |
+| [Mini Oval Hoparlör 8Ω 1W](https://www.direnc.net/mini-oval-hoparlor-8ohm-1w) | 2 (1 yedek) | 209,66 TL/adet | Evet | 30x20x5 mm, Molex 1.25 mm konnektörlü. |
+| [6x6 5mm Tact Buton (4 bacak)](https://www.direnc.net/6x6-4mm-tach-buton--4-bacak) | 10 | 1,51 TL/adet | Evet | |
+| [6x6 7mm Tact Buton (4 bacak)](https://www.direnc.net/6x6-9mm-tach-buton--4-bacak) | 10 | 3,60 TL/adet | Evet | Yükseklik kasa tasarımında seçilecek. |
 
-| Parça | Adet | Neden |
-|---|---|---|
-| ESP32-S3-DevKitC-1 **N16R8** | 1 | Üzerindeki modül PCB'deki modülle aynı (aynı kod, aynı pinler). Sonra da geliştirme kartı olarak işe yarar. **N16R8 yazmayanı alma.** |
-| MAX98357A I2S amfi modülü | 1 | Ses kodunu yazmak için. Finalde çipin kendisi PCB'de olacak. |
-| microSD kart modülü (SPI, 3.3V) | 1 | SD kart kodunu yazmak için. Finalde yuva PCB'de olacak. |
-| Breadboard (830 delik) | 1-2 | |
-| Jumper kablo (erkek-erkek, erkek-dişi) | 1 set | |
-| USB-C veri kablosu | 1 | Sadece şarj kablosu değil, veri kablosu olmalı. |
-| İnce tel (30 AWG) | 1 makara | Prototipte joystick FPC'sine lehimlemek için. |
+### Trendyol
+| Parça | Adet | Fiyat | Final mi? | Not |
+|---|---|---|---|---|
+| MAX98357 I2S amfi modülü, ör. [ROBİZ](https://www.trendyol.com/robiz/max98357-i2s-5v-3w-ses-yukseltici-amfi-class-d-dijital-ses-muzik-kuvvetlendirici-amfilikator-dac-p-406603487) | 1 | ~270-310 TL | Hayır (test) | ESP32-S3'te DAC yok, I2S amfi şart. Finalde çip PCB'de. |
+| [PS4 Analog Motoru x2 (POPKONSOL)](https://www.trendyol.com/popkonsol/ps4-analog-motoru-tum-playstation-4-kollarina-uyumlu-turuncu-seri-kaliteli-ps4-yedek-parca-x2-adet-p-127921128) | 1 paket | Kontrol edilmedi | Evet | 3D analog, bacakları doğrudan PCB'ye lehimlenir. PSP joystick Türkiye'de bulunamadı. |
+| [PS4 Analog Topuz (POPKONSOL)](https://www.trendyol.com/popkonsol/2-adet-ps4-analog-topuz-orjinal-yedek-parca-ps-v1-v2-tum-ps4-kollara-uyumlu-ps4-analog-thumb-stick-p-194605501) | 1 paket | Kontrol edilmedi | Evet | |
 
-## 3. PCB'ye dahil edilecekler (şimdi alınmaz)
+### Elde olanlar
+- Breadboard, jumper kablolar
+- **Veri aktarabilen** USB-C kablo (sadece şarj kablosu ile kart programlanamaz)
+
+---
+
+## 2. PCB'ye dahil edilecekler (şimdi alınmaz)
 
 Parça numaraları KiCad aşamasında JLCPCB/LCSC stok durumuna göre kesinleşecek.
 
@@ -63,25 +69,27 @@ Parça numaraları KiCad aşamasında JLCPCB/LCSC stok durumuna göre kesinleşe
 ### Güç
 | Parça | Not |
 |---|---|
-| TPS63020 + 1.5µH bobin + kondansatörler | 3.3V buck-boost |
+| TPS63020 + 1.5µH bobin + kondansatörler | 3.3V buck-boost. Ekran kartının VSYS pinini de bu hat besler. |
 | Yan sürgülü güç anahtarı (ör. MSK-12C02) | Gerçek açma/kapama |
 
-### Ekran, ses, depolama, kontroller
+### Ekran, ses, kontroller
 | Parça | Not |
 |---|---|
-| 2.54 mm dişi header | Ekran modülü için |
-| N-kanal MOSFET (ör. AO3400) | Ekran arka ışığı PWM parlaklık kontrolü |
+| 2x 1x20 erkek pin header (Pico düzeni) | Ekran kartı üstüne takılır; sadece gereken pinler bağlanır. |
 | MAX98357A çipi | I2S amfi; SD pini ESP32'ye bağlı |
-| JST-PH konnektör | Hoparlör |
-| microSD yuvası (push-push) | |
-| PSP joystick FPC konnektörü | Joystick modeline göre seçilecek |
-| 4x 6x6 tact switch | A, B, Start, Select (önden alınanlar) |
+| Molex 1.25 mm (PicoBlade) 2 pin konnektör | Hoparlör |
+| PS4 analog joystick footprint | Doğrudan lehim |
+| 4x 6x6 tact switch | A, B, Start, Select |
+
+Ekran kartında zaten olduğu için PCB'de **microSD yuvası** ve **arka ışık MOSFET'i** gerekmiyor.
 
 ### Diğer
 - Dekuplaj kondansatörleri, pull-up dirençleri
 - Güç bölümünde test noktaları ve kesilebilir köprüler (ilk test bataryasız yapılacak)
 
-## PCB aşamasında ayrıca alınacak
+---
+
+## 3. PCB aşamasında ayrıca alınacak
 | Parça | Not |
 |---|---|
 | 18650 hücre, **tırnaklı (puntalı)**, 3000-3500 mAh | Samsung 35E / LG MJ1 / Panasonic NCR18650B / Samsung 30Q. Güvenilir pil satıcısından, orijinal. Güç devresi test edilene kadar bağlanmayacak. |
