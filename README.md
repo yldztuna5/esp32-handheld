@@ -5,7 +5,7 @@
 ## Hedefler
 - **Güvenli batarya:** Şarjda unutulunca ısınmayan, sıcakta ve soğukta şarjı kendiliğinden durduran bir güç devresi.
 - **Uzun pil ömrü:** 18650 hücre ile ~10-12 saat kullanım.
-- **Kaliteli ekran:** 2.8" IPS, 320x240.
+- **Ekran:** 2.8", 320x240 (bütçe nedeniyle TN; PCB ileride IPS'e geçişe uygun).
 - **Kompakt yapı:** Özel PCB ile kasaya düzgünce sığan bir tasarım.
 - **USB-C:** Şarj ve programlama aynı porttan.
 - **Kendi yazılımı:** Launcher ve farklı oyunlar/mini uygulamalar.
@@ -27,8 +27,9 @@
 ## Yol haritası
 - [x] Gereksinimler ve temel parça kararları
 - [x] Pin planı
+- [x] Tasarım incelemesi (güç, pinler, ses, mekanik) ve düzeltmeler
 - [ ] Prototip parçalarını sipariş et
-- [ ] Breadboard: ESP32-S3 + ekran + butonlar + joystick + ses
+- [ ] Breadboard: ESP32-S3 + ekran + yön tuşu + butonlar + ses
 - [ ] Firmware: launcher iskeleti ve ilk uygulama
 - [ ] KiCad şema
 - [ ] KiCad PCB yerleşimi
