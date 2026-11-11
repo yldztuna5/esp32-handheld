@@ -1,0 +1,4 @@
+(fp_lib_table
+	(version 7)
+	(lib (name "handheld")(type "KiCad")(uri "${KIPRJMOD}/handheld.pretty")(options "")(descr "Project footprints"))
+)

@@ -1,0 +1,10 @@
+ERC report (2026-11-11T15:15:17+0300, Encoding UTF8)
+Report includes: Errors, Warnings, Exclusions
+
+***** Sheet /
+[pin_to_pin]: Pins of type Unspecified and Power input are connected
+    ; warning
+    @(309.88 mm, 144.78 mm): Symbol U7 Pin 17 [PAD, Unspecified, Line]
+    @(309.88 mm, 147.32 mm): Symbol #PWR038 Pin 1 [Power input, Line]
+
+ ** ERC messages: 1  Errors 0  Warnings 1
