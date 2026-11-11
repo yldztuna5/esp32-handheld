@@ -11,12 +11,13 @@ Tüm alışveriş Türkiye'den (2026 itibarıyla yurt dışı gönderilerde güm
 
 ## 1. Prototip siparişi
 
-Toplam ≈ 1.841 TL (kargolar dahil). Sepetler 11 Kasım 2026'da güncellendi; henüz sipariş verilmedi.
+Toplam ≈ 1.781 TL (kargolar dahil). Sepetler 11 Kasım 2026'da güncellendi; henüz sipariş verilmedi.
 
-### Robotistan (703,55 TL, 149 TL kargo dahil)
+### Robotistan (725,56 TL, 149 TL kargo dahil)
 | Parça | Adet | Fiyat | Final mi? | Not |
 |---|---|---|---|---|
 | [2.8" 240x320 SPI TFT LCD Ekran](https://www.robotistan.com/28inc-240x320-spi-tft-lcd-ekran) | 1 | 554,55 TL | Evet | TN, 320x240, ILI9341, SPI, **dokunmatiksiz**, microSD yuvalı. Dokunmatikli sürümü 582,68 TL; dokunmatik katmanı olmadığı için görüntü biraz daha net. Waveshare 2.8" IPS (963,42 TL) yerine, bütçe nedeniyle. Kart ölçüsü ve pin sırası ilanda yazmıyor; gelince doğrulanacak. |
+| [2x3W Mini Amfi Devresi, PAM8403](https://www.robotistan.com/23w-mini-amfi-devresi-pam8403) | 1 | 22,01 TL | Sadece prototip | Analog class-D. ESP32'den PDM + RC filtre + 10k/1k bölücü ile sürülür. PCB'de yerini I2S amfi çipi alır. Trendyol'daki aynı modül 82,40 TL idi. |
 
 ### Direnc.net (897,41 TL, 144 TL kargo dahil)
 | Parça | Adet | Fiyat | Final mi? | Not |
@@ -31,10 +32,9 @@ Toplam ≈ 1.841 TL (kargolar dahil). Sepetler 11 Kasım 2026'da güncellendi; h
 | [1uF 50V Kondansatör](https://www.direnc.net/1uf-50v-kondansator) | 5 | 4,31 TL | Prototip | Amfi girişi kuplaj |
 | [1x11 Erkek Pin Header](https://www.direnc.net/1160mm-11-pin-1x11-254mm-erkek-pin-header) | 2 | 5,23 TL | Prototip | PAM8403 modülünü breadboard'a takmak için |
 
-### Trendyol, ROBİZ (240,18 TL, 59,99 TL kargo dahil)
+### Trendyol, ROBİZ (157,78 TL, 59,99 TL kargo dahil)
 | Parça | Adet | Fiyat | Final mi? | Not |
 |---|---|---|---|---|
-| [ROBİZ PAM8403 Mini 2x3W Amfi](https://www.trendyol.com/robiz/pam8403-mini-2x3w-stereo-ses-amfilikatoru-d-class-amfi-yukseltici-p-330624448) | 1 | 82,40 TL | Sadece prototip | Analog class-D. ESP32'den PDM + RC filtre + 10k/1k bölücü ile sürülür. PCB'de yerini I2S amfi çipi alır. |
 | ROBİZ Hoparlör 1.5W 8Ω 20x30 mm, kablolu | 1 | 97,79 TL | Evet | Konnektör tipi parça gelince ölçülecek; PCB'ye uygun soket konacak. |
 
 ### Elde olanlar
