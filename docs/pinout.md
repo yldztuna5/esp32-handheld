@@ -99,7 +99,7 @@ Açık-drain sinyallerin pull-up'ları **3V3'e** gider (batarya ya da USB hattı
 GPIO45 ve GPIO46 (strapping, boş bırakılır). Joystick takılmazsa GPIO1 ve GPIO2 de boşalır (titreşim motoru vb. için).
 
 ## Doğrulanacaklar (ekran modülü gelince)
-Modülün şeması satıcı sayfasında yok; aşağıdakiler bu modül tipinin (MSP2807) bilinen düzenine dayanıyor ve breadboard'da kontrol edilecek:
+Satıcı sayfasında belge yok, ama bu modül tipinin üretici belgeleri [LCDwiki](https://www.lcdwiki.com/2.8inch_SPI_Module_ILI9341_SKU:MSP2807)'de: dokunmatiksiz sürüm MSP2806, kart 50,0 x 86,0 mm, 14'lü başlık sırası yukarıdaki tabloyla aynı; ölçü çizimi ([MSP2806_Size.pdf](https://www.lcdwiki.com/res/MSP2807/MSP2806_Size.pdf)) ve şema ([MSP2807-2.8-SPI.pdf](https://www.lcdwiki.com/res/MSP2807/MSP2807-2.8-SPI.pdf)) orada. PCB bu belgelere göre çizilir. Gelen kartın gerçekten bu modül olduğu, PCB siparişinden önce şunlarla kontrol edilecek:
 - 14'lü başlık sırası ve SD başlığının sırası (kartın üstündeki yazılardan).
 - J1 köprüsünün yeri ve 3.3V ile parlaklık.
 - LED pininin çektiği akım.
