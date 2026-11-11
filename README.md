@@ -31,8 +31,8 @@
 - [ ] Prototip parçalarını sipariş et
 - [ ] Breadboard: ESP32-S3 + ekran + yön tuşu + butonlar + ses
 - [ ] Firmware: launcher iskeleti ve ilk uygulama
-- [ ] KiCad şema
-- [ ] KiCad PCB yerleşimi
+- [x] KiCad şema (kod ile üretiliyor: `hardware/pcb/gen/`)
+- [ ] KiCad PCB yerleşimi (v1 taslak hazır, sipariş öncesi gözden geçirilecek)
 - [ ] Kasa tasarımı (PCB ölçülerine göre)
 - [ ] PCB v1 sipariş ve güç devresi testi (bataryasız)
 - [ ] Montaj ve tam sistem testi

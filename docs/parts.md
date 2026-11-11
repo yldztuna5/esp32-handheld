@@ -67,7 +67,7 @@ Parça numaraları KiCad aşamasında JLCPCB/LCSC stok durumuna göre kesinleşe
 ### Şarj ve batarya
 | Parça | Not |
 |---|---|
-| BQ24074 (LCSC C54313) | Şarj çipi: NTC, zamanlayıcı, power path. 500 mA şarj (RISET 1.78k), USB500 giriş sınırı (EN1 HIGH, EN2 LOW), RTMR 71.5k. |
+| BQ24074 (LCSC C54313) | Şarj çipi: NTC, zamanlayıcı, power path. 500 mA şarj (RISET 1.78k), USB500 giriş sınırı (EN1 HIGH, EN2 LOW), RTMR 68k. |
 | DW01A + FS8205A | Hücre koruması (aşırı şarj/deşarj, kısa devre) |
 | 10k NTC termistör (kablolu, **B≈3950**) | Hücreye bantlanır, BQ24074'e bağlanır. B=3435 değil: sıcak eşiği 50°C'ye çıkarıyor. |
 | JST-PH konnektör (batarya + NTC) | |
@@ -78,7 +78,7 @@ Parça numaraları KiCad aşamasında JLCPCB/LCSC stok durumuna göre kesinleşe
 ### Güç
 | Parça | Not |
 |---|---|
-| TPS63021 + 1.5µH bobin + kondansatörler | Sabit 3.3V buck-boost. |
+| TPS63020 (LCSC C15483) + 1.5µH bobin + kondansatörler | 3.3V buck-boost (TPS63021 stokta yok). |
 | Yan sürgülü güç anahtarı (ör. MSK-12C02) | Regülatörün EN pinini kontrol eder; akım taşımaz. |
 
 ### Ekran, ses, kontroller

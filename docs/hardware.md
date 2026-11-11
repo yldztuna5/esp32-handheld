@@ -8,7 +8,7 @@
 | Şarj | TI BQ24074 | NTC, güvenlik zamanlayıcısı, power path. Şarj akımı 500 mA, giriş sınırı USB500 (bkz. [güç ve güvenlik](power-safety.md)). |
 | Batarya koruması | DW01A + FS8205A (PCB üzerinde) + sigorta + ters takma koruması | Aşırı şarj, aşırı deşarj, kısa devre, ters bağlantı. |
 | USB girişi | USB-C, CC'lerde 2x 5.1k, PTC sigorta, TVS | 5.1k dirençler olmadan C-to-C şarj çalışmaz. |
-| Regülatör | TPS63021 buck-boost, sabit 3.3V | Bataryanın tamamını kullanır, ses tepe akımlarını karşılar. Sabit çıkışlı olduğu için geri besleme dirençleri yok. |
+| Regülatör | TPS63020 buck-boost, 3.3V | Bataryanın tamamını kullanır, ses tepe akımlarını karşılar. Sabit çıkışlı TPS63021 JLCPCB stokunda olmadığı için ayarlanabilir sürüm; çıkış iki dirençle 3.3V'a ayarlı. |
 | Pil göstergesi | MAX17048 (I2C) | Doğru yüzde, düşük pilde kayıt + kapanma. |
 | Ses | PCB'de I2S amfi çipi (MAX98357A veya NS4168) + 8Ω 1.5W hoparlör (20x30 mm) | Çip dizgide 0,4-1,4 dolar; modülü pahalıydı, çipi değil. Batarya hattından beslenir, saat kesilince kendini kapatır. Breadboard'da PAM8403 modülü kullanılır: PDM çıkışı + RC filtre + 10k/1k bölücü. Hoparlör çıkışları GND'ye asla bağlanmaz. |
 | Depolama | microSD (SPI) | Ekran modülünün üzerindeki yuva. LCD ile aynı SPI hattında, ayrı CS pini (bkz. [pin planı](pinout.md)). |
