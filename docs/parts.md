@@ -11,25 +11,25 @@ Tüm alışveriş Türkiye'den (2026 itibarıyla yurt dışı gönderilerde güm
 
 ## 1. Prototip siparişi
 
-Toplam ≈ 1.870 TL (kargolar dahil). Henüz sipariş verilmedi.
+Toplam ≈ 1.841 TL (kargolar dahil). Sepetler 11 Kasım 2026'da güncellendi; henüz sipariş verilmedi.
 
-### Robotistan (731,68 TL, 149 TL kargo dahil)
+### Robotistan (703,55 TL, 149 TL kargo dahil)
 | Parça | Adet | Fiyat | Final mi? | Not |
 |---|---|---|---|---|
-| [2.8" SPI Dokunmatik TFT Ekran Modülü, ILI9341](https://www.robotistan.com/28-inc-arduino-dokunmatik-ekran-shield-240320) | 1 | 582,68 TL | Evet | TN, 320x240, ILI9341, SPI. Kart 50 x 86 mm; microSD yuvası ve rezistif dokunmatik (kullanılmıyor) var. Waveshare 2.8" IPS (963,42 TL) yerine, bütçe nedeniyle. Aynı modül Direnc.net'te 563,18 TL ama stokta yok (Kasım 2026). |
+| [2.8" 240x320 SPI TFT LCD Ekran](https://www.robotistan.com/28inc-240x320-spi-tft-lcd-ekran) | 1 | 554,55 TL | Evet | TN, 320x240, ILI9341, SPI, **dokunmatiksiz**, microSD yuvalı. Dokunmatikli sürümü 582,68 TL; dokunmatik katmanı olmadığı için görüntü biraz daha net. Waveshare 2.8" IPS (963,42 TL) yerine, bütçe nedeniyle. Kart ölçüsü ve pin sırası ilanda yazmıyor; gelince doğrulanacak. |
 
-### Direnc.net (≈ 898 TL, 144 TL kargo dahil)
+### Direnc.net (897,41 TL, 144 TL kargo dahil)
 | Parça | Adet | Fiyat | Final mi? | Not |
 |---|---|---|---|---|
-| [ESP32 S3 N16R8 WiFi Bluetooth Board](https://www.direnc.net/esp32-s3-n16r8-wifi-bluetooth-board) | 1 | 610,23 TL | Geliştirme kartı | ESP32-S3-WROOM-1-N16R8, çift USB Type-C. PCB'deki modülle aynı (aynı kod, aynı pinler). |
-| [6x6 5mm Tact Buton (4 bacak)](https://www.direnc.net/6x6-4mm-tach-buton--4-bacak) | 10 | 14,36 TL | Evet | Yön tuşu (4) + A, B, Start, Select (4) |
-| [6x6 7mm Tact Buton (4 bacak)](https://www.direnc.net/6x6-9mm-tach-buton--4-bacak) | 10 | 34,23 TL | Evet | Yükseklik kasa tasarımında seçilecek. |
-| [Arduino XY Joystick Modül](https://www.direnc.net/arduino-xy-joystick-modul-1) | 2 | 63,93 TL | İsteğe bağlı | PS2 tipi joystick + topuz. Ana kontrol yön tuşu; joystick denemek için. İstenirse sepetten çıkarılabilir. |
-| [1K 1/4W Direnç](https://www.direnc.net/1k-14w-direnc) | paket | 8,72 TL | Prototip | PDM ses filtresi ve ses bölücü |
-| 10K 1/4W Direnç | paket | ≈ 9 TL | Prototip | Ses bölücü (10k/1k) ve pull-up'lar. **Sepete henüz eklenmedi.** |
-| [10nF 63V Seramik Kondansatör](https://www.direnc.net/10nf-63v-seramik) | 10 | 4,07 TL | Prototip | PDM ses filtresi |
-| [1uF 50V Kondansatör](https://www.direnc.net/1uf-50v-kondansator) | 5 | 4,07 TL | Prototip | Amfi girişi kuplaj |
-| [1x11 Erkek Pin Header](https://www.direnc.net/1160mm-11-pin-1x11-254mm-erkek-pin-header) | 2 | 5,21 TL | Prototip | PAM8403 modülünü breadboard'a takmak için |
+| [ESP32 S3 N16R8 WiFi Bluetooth Board](https://www.direnc.net/esp32-s3-n16r8-wifi-bluetooth-board) | 1 | 635,17 TL | Geliştirme kartı | ESP32-S3-WROOM-1-N16R8, çift USB Type-C. PCB'deki modülle aynı (aynı kod, aynı pinler). |
+| [6x6 5mm Tact Buton (4 bacak)](https://www.direnc.net/6x6-4mm-tach-buton--4-bacak) | 10 | 14,94 TL | Evet | Yön tuşu (4) + A, B, Start, Select (4) |
+| [6x6 7mm Tact Buton (4 bacak)](https://www.direnc.net/6x6-9mm-tach-buton--4-bacak) | 10 | 35,63 TL | Evet | Yükseklik kasa tasarımında seçilecek. |
+| [Arduino XY Joystick Modül](https://www.direnc.net/arduino-xy-joystick-modul-1) | 1 | 33,27 TL | İsteğe bağlı | PS2 tipi joystick + topuz. Ana kontrol yön tuşu; joystick denemek için. |
+| [1K 1/4W Direnç](https://www.direnc.net/1k-14w-direnc) | 50 | 11,19 TL | Prototip | PDM ses filtresi ve ses bölücü |
+| [10K 1/4W Direnç](https://www.direnc.net/10k-14w-direnc) | 50 | 9,07 TL | Prototip | Ses bölücü (10k/1k) ve pull-up'lar |
+| [10nF 63V Seramik Kondansatör](https://www.direnc.net/10nf-63v-seramik) | 10 | 4,60 TL | Prototip | PDM ses filtresi |
+| [1uF 50V Kondansatör](https://www.direnc.net/1uf-50v-kondansator) | 5 | 4,31 TL | Prototip | Amfi girişi kuplaj |
+| [1x11 Erkek Pin Header](https://www.direnc.net/1160mm-11-pin-1x11-254mm-erkek-pin-header) | 2 | 5,23 TL | Prototip | PAM8403 modülünü breadboard'a takmak için |
 
 ### Trendyol, ROBİZ (240,18 TL, 59,99 TL kargo dahil)
 | Parça | Adet | Fiyat | Final mi? | Not |
