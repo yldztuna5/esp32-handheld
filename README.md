@@ -24,6 +24,7 @@
 - [Parça listesi](docs/parts.md)
 - [Pin planı](docs/pinout.md)
 - [Modüllü sürüm (delikli kart)](docs/module-build.md)
+- [Delikli kart yerleşimi ve bağlantı tablosu](hardware/perfboard/README.md)
 
 ## Yol haritası
 - [x] Gereksinimler ve temel parça kararları
