@@ -11,9 +11,9 @@ Tüm alışveriş Türkiye'den (2026 itibarıyla yurt dışı gönderilerde güm
 
 ## 1. Prototip siparişi
 
-Toplam ≈ 2.291 TL (kargolar ve modüllü sürüm ekleri dahil). Sepetler 12 Kasım 2026'da güncellendi; henüz sipariş verilmedi.
+Toplam ≈ 2.396 TL (kargolar ve modüllü sürüm ekleri dahil). Sepetler 12 Kasım 2026'da güncellendi; henüz sipariş verilmedi.
 
-### Robotistan (tek sepet: 1.087,01 TL + 149 TL kargo = 1.236,01 TL, modüllü sürüm ekleriyle birlikte)
+### Robotistan (tek sepet: 1.192,30 TL + 149 TL kargo = 1.341,30 TL, modüllü sürüm ekleriyle birlikte)
 | Parça | Adet | Fiyat | Final mi? | Not |
 |---|---|---|---|---|
 | [2.8" 240x320 SPI TFT LCD Ekran](https://www.robotistan.com/28inc-240x320-spi-tft-lcd-ekran) | 1 | 554,89 TL | Evet | TN, 320x240, ILI9341, SPI, **dokunmatiksiz**, microSD yuvalı. Dokunmatikli sürümü 582,68 TL; dokunmatik katmanı olmadığı için görüntü biraz daha net. Waveshare 2.8" IPS (963,42 TL) yerine, bütçe nedeniyle. Kart ölçüsü ve pin sırası ilanda yazmıyor; gelince doğrulanacak. |
@@ -37,7 +37,7 @@ Toplam ≈ 2.291 TL (kargolar ve modüllü sürüm ekleri dahil). Sepetler 12 Ka
 |---|---|---|---|---|
 | ROBİZ Hoparlör 1.5W 8Ω 20x30 mm, kablolu | 1 | 97,79 TL | Evet | Konnektör tipi parça gelince ölçülecek; PCB'ye uygun soket konacak. |
 
-### Modüllü sürüm ekleri, Robotistan (510,10 TL, kargo yukarıdaki sepette)
+### Modüllü sürüm ekleri, Robotistan (615,39 TL, kargo yukarıdaki sepette)
 
 Özel PCB yerine delikli kartla yapılacak sürüm için: [module-build.md](module-build.md).
 Ekran ve amfi ile aynı sepette.
@@ -54,8 +54,11 @@ Ekran ve amfi ile aynı sepette.
 | [IC125B S Mini Anahtar](https://www.robotistan.com/ic125b-s-mini-anahtar) | 2 | 20,56 TL | Açma/kapama. Akım değeri ilanda yazmıyor; gelince ısınma kontrol edilecek. |
 | [6x13 cm Delikli Pertinaks](https://www.robotistan.com/7x12-delikli-pertinaks) | 1 | 32,61 TL | Ana kart |
 | [5x10 cm Delikli Pertinaks](https://www.robotistan.com/5x10-cm-delikli-pertinaks-tek-yuzlu) | 1 | 19,45 TL | Buton kartı veya yedek |
+| [1x40 Dişi Pin Header](https://www.robotistan.com/1x40-180-disi) | 3 | 34,32 TL | ESP32 (2x22) ve ekran (1x14) soketleri; kesilerek kullanılır. |
+| [8 mm M3 Dişi-Dişi Aralayıcı](https://www.robotistan.com/q-8mm-m3-metal-disi-disi-aralayici-standoff) | 4 | 12,24 TL | İki kartı üst üste tutar. |
+| [40 Pin Erkek-Erkek Jumper Kablo 200 mm](https://www.robotistan.com/40-pin-ayrilabilen-erkek-erkek-m-m-jumper-kablo-200-mm) | 1 | 58,73 TL | Uçları kesilip bağlantı teli olarak kullanılır. |
 
-Ayrıca gerekenler: 2 adet 100k direnç ve 1 adet 100 nF kondansatör (pil ölçümü), ince bağlantı teli.
+Sepette olmayanlar: 8 adet M3 6 mm vida (Robotistan'da 25'lik paket sepete eklenemedi; hırdavatçıdan alınabilir), termostat için ısıya dayanıklı bant ya da kablo bağı. Pil ölçümü için Direnc sepetindeki 10k dirençlerden ikisi ve 1 µF kondansatör kullanılır.
 
 ### Elde olanlar
 - Breadboard, jumper kablolar

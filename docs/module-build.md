@@ -34,7 +34,7 @@ Bütün GND'ler ortaktır.
 | Şase | TP4056 OUT− | MT3608 VIN−, ESP32 GND |
 | 5 V | MT3608 VOUT+ | ESP32 kartı 5V pini, PAM8403 VCC |
 | 3,3 V | ESP32 kartı 3V3 pini | ekran VCC |
-| Pil ölçümü | anahtardan sonraki pil hattı → 100k → GPIO3 → 100k → GND | GPIO3'e 100 nF (GND'ye) |
+| Pil ölçümü | anahtardan sonraki pil hattı → 10k → GPIO3 → 10k → GND | GPIO3'e 1 µF (GND'ye) |
 
 Pil ölçümü anahtardan sonra alınır, böylece cihaz kapalıyken bölücü pili
 tüketmez. GPIO3'te okunan gerilim pil geriliminin yarısıdır.
