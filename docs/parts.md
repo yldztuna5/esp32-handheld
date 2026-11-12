@@ -11,13 +11,13 @@ Tüm alışveriş Türkiye'den (2026 itibarıyla yurt dışı gönderilerde güm
 
 ## 1. Prototip siparişi
 
-Toplam ≈ 1.781 TL (kargolar dahil). Sepetler 11 Kasım 2026'da güncellendi; henüz sipariş verilmedi.
+Toplam ≈ 2.291 TL (kargolar ve modüllü sürüm ekleri dahil). Sepetler 12 Kasım 2026'da güncellendi; henüz sipariş verilmedi.
 
-### Robotistan (725,56 TL, 149 TL kargo dahil)
+### Robotistan (tek sepet: 1.087,01 TL + 149 TL kargo = 1.236,01 TL, modüllü sürüm ekleriyle birlikte)
 | Parça | Adet | Fiyat | Final mi? | Not |
 |---|---|---|---|---|
-| [2.8" 240x320 SPI TFT LCD Ekran](https://www.robotistan.com/28inc-240x320-spi-tft-lcd-ekran) | 1 | 554,55 TL | Evet | TN, 320x240, ILI9341, SPI, **dokunmatiksiz**, microSD yuvalı. Dokunmatikli sürümü 582,68 TL; dokunmatik katmanı olmadığı için görüntü biraz daha net. Waveshare 2.8" IPS (963,42 TL) yerine, bütçe nedeniyle. Kart ölçüsü ve pin sırası ilanda yazmıyor; gelince doğrulanacak. |
-| [2x3W Mini Amfi Devresi, PAM8403](https://www.robotistan.com/23w-mini-amfi-devresi-pam8403) | 1 | 22,01 TL | Sadece prototip | Analog class-D. ESP32'den PDM + RC filtre + 10k/1k bölücü ile sürülür. PCB'de yerini I2S amfi çipi alır. Trendyol'daki aynı modül 82,40 TL idi. |
+| [2.8" 240x320 SPI TFT LCD Ekran](https://www.robotistan.com/28inc-240x320-spi-tft-lcd-ekran) | 1 | 554,89 TL | Evet | TN, 320x240, ILI9341, SPI, **dokunmatiksiz**, microSD yuvalı. Dokunmatikli sürümü 582,68 TL; dokunmatik katmanı olmadığı için görüntü biraz daha net. Waveshare 2.8" IPS (963,42 TL) yerine, bütçe nedeniyle. Kart ölçüsü ve pin sırası ilanda yazmıyor; gelince doğrulanacak. |
+| [2x3W Mini Amfi Devresi, PAM8403](https://www.robotistan.com/23w-mini-amfi-devresi-pam8403) | 1 | 22,02 TL | Modüllü sürümde kalıcı | Analog class-D. ESP32'den PDM + RC filtre + 10k/1k bölücü ile sürülür. PCB'de yerini I2S amfi çipi alır. Trendyol'daki aynı modül 82,40 TL idi. |
 
 ### Direnc.net (897,41 TL, 144 TL kargo dahil)
 | Parça | Adet | Fiyat | Final mi? | Not |
@@ -37,10 +37,10 @@ Toplam ≈ 1.781 TL (kargolar dahil). Sepetler 11 Kasım 2026'da güncellendi; h
 |---|---|---|---|---|
 | ROBİZ Hoparlör 1.5W 8Ω 20x30 mm, kablolu | 1 | 97,79 TL | Evet | Konnektör tipi parça gelince ölçülecek; PCB'ye uygun soket konacak. |
 
-### Modüllü sürüm ekleri, Robotistan (510,10 TL + 149 TL kargo)
+### Modüllü sürüm ekleri, Robotistan (510,10 TL, kargo yukarıdaki sepette)
 
 Özel PCB yerine delikli kartla yapılacak sürüm için: [module-build.md](module-build.md).
-Ekran ve amfi ile aynı siparişte alınırsa kargo bir kez ödenir.
+Ekran ve amfi ile aynı sepette.
 
 | Parça | Adet | Fiyat | Not |
 |---|---|---|---|
