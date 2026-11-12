@@ -11,7 +11,8 @@ farkları anlatır.
 
 ```
 18650 pil (yuvada)
-   │  B+ / B-
+   │  + ── 2 A cam sigorta ── 50 °C termostat (pile yapışık) ── B+
+   │  − ───────────────────────────────────────────────────── B−
 TP4056 Type-C şarj modülü (DW01 korumalı)
    │  OUT+ ── açma/kapama anahtarı ──┐
    │  OUT- ─────────────── GND      │
@@ -27,7 +28,8 @@ Bütün GND'ler ortaktır.
 
 | Bağlantı | Nereden | Nereye |
 |---|---|---|
-| Pil | yuva + / − | TP4056 B+ / B− |
+| Pil + | yuva + | 2 A sigorta → 50 °C termostat → TP4056 B+ |
+| Pil − | yuva − | TP4056 B− |
 | Anahtar | TP4056 OUT+ | MT3608 VIN+ (anahtar üzerinden) |
 | Şase | TP4056 OUT− | MT3608 VIN−, ESP32 GND |
 | 5 V | MT3608 VOUT+ | ESP32 kartı 5V pini, PAM8403 VCC |
@@ -36,6 +38,12 @@ Bütün GND'ler ortaktır.
 
 Pil ölçümü anahtardan sonra alınır, böylece cihaz kapalıyken bölücü pili
 tüketmez. GPIO3'te okunan gerilim pil geriliminin yarısıdır.
+
+Sigorta, pil yuvasının + ucuna en yakın yere konur; ondan önceki tel
+olabildiğince kısa tutulur. Termostat (KSD301, normalde kapalı) düz metal
+yüzü pile değecek şekilde ısıya dayanıklı bantla ya da kablo bağıyla pile
+sabitlenir. Pil yüzeyi 50 °C'ye ulaşırsa hem şarjı hem deşarjı keser,
+soğuyunca kendiliğinden yeniden bağlar.
 
 ## Kurulum sırası
 
@@ -73,13 +81,18 @@ Var:
 - Aşırı deşarj kesmesi (yaklaşık 3,0 V)
 - Aşırı akım ve kısa devre kesmesi (yaklaşık 3 A)
 - Şarj çipinin kendi sıcaklığına göre akımı kısması
+- Pil sıcaklığı 50 °C'ye çıkınca pili devreden ayıran termostat
+- Pil çıkışında 2 A sigorta (koruma devresi bozulsa bile kısa devreyi keser)
+- Üreticisi belli pil (Tenpower INR18650-32HE)
 
 Yok:
 
-- Pil sıcaklığına göre şarj kesme (NTC)
 - Şarj süresi sınırı
 - Güç yolu (şarj sırasında cihazı ayrıca besleme)
-- Sigorta ve ters pil koruması
+- Ters pil koruması (pili yuvaya doğru yönde takmak gerekir)
+
+Hiçbir devre pilin kendi iç arızasını durduramaz; bu yüzden cihaz yatak,
+yastık gibi yanıcı ve ısıyı tutan yüzeylerde şarj edilmez.
 
 Özel PCB sürümünde bunların hepsi vardır: [power-safety.md](power-safety.md).
 

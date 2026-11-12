@@ -37,7 +37,7 @@ Toplam ≈ 1.781 TL (kargolar dahil). Sepetler 11 Kasım 2026'da güncellendi; h
 |---|---|---|---|---|
 | ROBİZ Hoparlör 1.5W 8Ω 20x30 mm, kablolu | 1 | 97,79 TL | Evet | Konnektör tipi parça gelince ölçülecek; PCB'ye uygun soket konacak. |
 
-### Modüllü sürüm ekleri, Robotistan (382,18 TL + 149 TL kargo)
+### Modüllü sürüm ekleri, Robotistan (510,10 TL + 149 TL kargo)
 
 Özel PCB yerine delikli kartla yapılacak sürüm için: [module-build.md](module-build.md).
 Ekran ve amfi ile aynı siparişte alınırsa kargo bir kez ödenir.
@@ -47,7 +47,10 @@ Ekran ve amfi ile aynı siparişte alınırsa kargo bir kez ödenir.
 | [TP4056 Type-C 1S Şarj Devresi](https://www.robotistan.com/tp4056-type-c-1s-37v-lipo-li-ion-pil-sarj-devresi) | 2 | 44,05 TL | Korumalı (aşırı şarj 4,28 V, aşırı deşarj 3,0 V, aşırı akım 3 A). Biri yedek. |
 | [MT3608 Ayarlanabilir Voltaj Yükseltici](https://www.robotistan.com/ayarlanabilir-voltaj-yukseltici-kart-step-up-converter) | 1 | 47,72 TL | Bağlamadan önce 5,0 V'a ayarlanacak. |
 | [18650 Tekli Pil Yuvası (PCB Tip)](https://www.robotistan.com/18650-tekli-pil-yuvasi-pcb-tip) | 1 | 25,69 TL | 75 x 23 x 21 mm |
-| [Orion 18650 3200mAh Li-ion, kutup başsız](https://www.robotistan.com/orion-18650-3-7v-3200mah-2c-liion-sarjli-pil-kutup-bassiz) | 1 | 192,10 TL | Korumasız hücre; koruma şarj modülünde. 2200 mAh sürümü 122,36 TL. |
+| [Tenpower INR18650-32HE 3200mAh, 10A](https://www.robotistan.com/tenpower-inr1865032he-37v-3200mah-pil-10a) | 1 | 234,92 TL | Üreticisi belli hücre. Korumasız; koruma şarj modülünde. Robotistan'da Samsung/LG/Panasonic yok. |
+| [50 °C Termostat, KSD301, normalde kapalı](https://www.robotistan.com/50c-derece) | 1 | 51,45 TL | Pile yapıştırılır, pil hattına seri bağlanır. |
+| [Sigorta Yuvası 5x20mm PCB Montaj](https://www.robotistan.com/sigorta-yuvasi-5x20mm-180-pcb-montaj) | 1 | 26,31 TL | Pil + hattı |
+| [5x20 mm 2 A Cam Sigorta](https://www.robotistan.com/5x20mm-15) | 5 | 7,34 TL | Yedekli |
 | [IC125B S Mini Anahtar](https://www.robotistan.com/ic125b-s-mini-anahtar) | 2 | 20,56 TL | Açma/kapama. Akım değeri ilanda yazmıyor; gelince ısınma kontrol edilecek. |
 | [6x13 cm Delikli Pertinaks](https://www.robotistan.com/7x12-delikli-pertinaks) | 1 | 32,61 TL | Ana kart |
 | [5x10 cm Delikli Pertinaks](https://www.robotistan.com/5x10-cm-delikli-pertinaks-tek-yuzlu) | 1 | 19,45 TL | Buton kartı veya yedek |
