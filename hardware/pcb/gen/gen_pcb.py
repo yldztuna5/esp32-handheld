@@ -9,6 +9,7 @@ silkscreen.  Coordinates in this file are millimetres, origin = top-left board
 corner, x right, y down, seen from the FRONT (also for parts on the back).
 """
 import json
+import math
 import os
 import sys
 
@@ -338,7 +339,25 @@ class Board:
         full = {}
         for (ref, pin), name in self.pin_net.items():
             full[name.lstrip("/")] = name
-        for net, l, x1, y1, x2, y2, w in self.r.tracks:
+        # drop the last grid step of a branch when it lies completely inside the copper of a wider
+        # track of the same net (KiCad reports such a piece as a dangling track)
+        def inside(px, py, s):
+            vx, vy = s[4] - s[2], s[5] - s[3]
+            L2 = vx * vx + vy * vy
+            t = 0.0 if L2 < 1e-12 else min(1.0, max(0.0, ((px - s[2]) * vx + (py - s[3]) * vy) / L2))
+            return math.hypot(px - s[2] - t * vx, py - s[3] - t * vy) < s[6] / 2 - 0.05
+
+        by_net = {}
+        for s in self.r.tracks:
+            by_net.setdefault((s[0], s[1]), []).append(s)
+        tracks = []
+        for s in self.r.tracks:
+            if math.hypot(s[4] - s[2], s[5] - s[3]) < 0.4 and any(
+                    o is not s and o[6] > s[6] - 1e-6 and math.hypot(o[4] - o[2], o[5] - o[3]) > 0.4 and
+                    inside(s[2], s[3], o) and inside(s[4], s[5], o) for o in by_net[(s[0], s[1])]):
+                continue
+            tracks.append(s)
+        for net, l, x1, y1, x2, y2, w in tracks:
             if abs(x1 - x2) < 1e-6 and abs(y1 - y2) < 1e-6:
                 continue
             t = pcbnew.PCB_TRACK(self.b)
@@ -458,6 +477,8 @@ def fix_islands(b, r):
                 added += 1
                 done = True
                 break
+        if not done:
+            print("GND island not tied: %s x %.2f..%.2f y %.2f..%.2f" % (b.GetLayerName(l), x0, x1, y0, y1))
     if added:
         print("added %d vias to tie GND islands to the plane" % added)
     return added

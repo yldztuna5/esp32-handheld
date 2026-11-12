@@ -5,8 +5,10 @@ route(bd):  explicit copper (regulator pours, USB connector fan-out, thermal
 finish(bd): silkscreen / fab texts.
 All coordinates: mm, board origin top-left, front view.
 """
+import os
 import time
 
+import numpy as np
 import pcbnew
 
 import design
@@ -130,13 +132,13 @@ def usb(bd):
     track(bd, "CC1", B, [(60.75, y0), (60.75, 9.0)], 0.25, join=[("J1", "A5"), ("R1", 1)])
     track(bd, "CC2", B, [(63.75, y0), (63.75, 9.0)], 0.25, join=[("J1", "B5"), ("R2", 1)])
     # VBUS: right pads on the back to F1, left pads hop over on the front
-    track(bd, "VBUS", B, [(64.45, y0), (64.45, 8.3), (64.9, 8.75)], 0.4)
+    track(bd, "VBUS", B, [(64.45, y0), (64.45, 8.3), (64.9, 8.75)], 0.6)
     track(bd, "VBUS", B, [(64.9, 8.75), (67.25, 8.75), (68.0, 9.5), (69.1, 9.5)], 0.6,
           join=[("J1", "A9"), ("F1", 1)])
-    track(bd, "VBUS", B, [(59.55, y0), (59.45, 8.45), (58.8, 8.9)], 0.4)
-    for x, y in ((59.45, 8.45), (58.8, 8.9), (66.25, 8.75), (67.0, 8.75)):
+    track(bd, "VBUS", B, [(59.55, y0), (59.55, 8.35), (58.8, 8.9)], 0.6)
+    for x, y in ((59.55, 8.35), (58.8, 8.9), (66.25, 8.75), (67.0, 8.75)):
         r.add_via("VBUS", x, y)
-    track(bd, "VBUS", F, [(58.8, 8.9), (59.45, 8.45), (59.75, 8.75), (67.0, 8.75)], 0.6,
+    track(bd, "VBUS", F, [(58.8, 8.9), (59.55, 8.35), (59.95, 8.75), (67.0, 8.75)], 0.6,
           join=[("J1", "A4"), ("J1", "A9")])
 
 
@@ -206,13 +208,74 @@ def escape(bd, ref, length=0.75):
             track(bd, net, B, pts, 0.25, join=[(ref, pin)])
             # routing must continue from the stub end (no second exit from the pad)
             endc = r.cell(B, iy, ix)
+            bd.stub[(ref, pin)] = endc
             comp = next(c for c in r.comps[net] if endc in c)
             comp.clear()
             comp.add(endc)
 
 
+# main current paths: routed first, wide, as fixed copper (pads in path order)
+TRUNKS = [
+    ("BATT_P", "w", [("J2", 1), ("F2", 1)]),
+    ("BATT_PF", "w", [("F2", 2), ("Q1", 3)]),
+    ("FET_D", "w", [("Q2", 2), ("Q2", 5)]),
+    ("BATT_N", "w", [("J2", 2), ("Q2", 1)]),
+    ("VBAT", "w", [("Q1", 2), ("C3", 1), ("U2", 2), ("U2", 3)]),
+    ("VBUS_F", "w", [("F1", 2), ("C1", 1), ("U2", 13)]),
+    ("SYS", "p", [("U2", 10), ("U2", 11), ("C2", 1), ("JP1", 1), ("U7", 7), ("U7", 8)]),
+    ("3V3", "p", [("JP2", 2), ("U6", 2), ("C12", 1), ("C13", 1)]),
+    ("3V3", "p", [("JP2", 2), ("J4", 1)]),
+    ("SPK_P", "p", [("U7", 9), ("J7", 1)]),
+    ("SPK_N", "p", [("U7", 10), ("J7", 2)]),
+]
+
+
+def trunk(bd, net, cls, pads):
+    r = bd.r
+
+    def comp_of(ref, pin):
+        c = bd.stub.get((ref, str(pin)))
+        if c is None:
+            c = next(iter(cells(bd, ref, pin)[0]))
+        for k in r.comps[net]:
+            if c in k:
+                return k
+        return None        # pad swallowed by an escape stub of the same net
+
+    # small pads: leave from the pad centre (full width inside the pad)
+    for ref, pin in pads:
+        p = bd.pads[(ref, str(pin))][0]
+        k = comp_of(ref, pin)
+        c = r.cell(B, *r.node(p["x"], p["y"]))
+        if k is not None and (ref, str(pin)) not in bd.stub and p["smd"] and c in k and r.padw.get(c, 9) < 1.0 \
+                and len(k) == len(p["cells"]):
+            k.clear()
+            k.add(c)
+            bd.stub[(ref, str(pin))] = c
+    avoid = None
+    if net == "3V3" and pads[-1] == ("J4", 1):
+        # display supply: front-layer hop along the top edge of the module (y 8.5..10.5), so that the
+        # back-side escape area south and west of the module is not walled in by this trunk
+        avoid = np.zeros((2, r.ny, r.nx), bool)
+        r.stamp_bool(avoid[B], ("rect", 16.5, 50.0, 16.5, 50.0), 0.01)
+        r.stamp_bool(avoid[F], ("rect", 24.0, 20.0, 12.0, 9.5), 0.01)
+    tree = comp_of(*pads[0])
+    for ref, pin in pads[1:]:
+        src = comp_of(ref, pin)
+        if src is tree or src is None:
+            continue
+        path = r.search(net, src, tree, power=True, fcost=3.0, via_cost=15.0, pent=(1.0, 1.1, 10.0), avoid=avoid)
+        if path is None:
+            print("trunk %s to %s.%s: no path (left to the maze router)" % (net, ref, pin))
+            continue
+        r.commit(net, path, power=True, twin=True, max_cls=cls)
+        tree = comp_of(*pads[0])
+
+
 def route(bd):
     r = bd.r
+    bd.stub = {}
+    r.verbose = bool(os.environ.get("KH_VERBOSE"))
     t0 = time.time()
     obstacles(bd)
     regulator(bd)
@@ -228,7 +291,7 @@ def route(bd):
         return (max(xs) - min(xs)) + (max(ys) - min(ys))
 
     # GND vias of the decoupling / bulk capacitors first, so that they end up right at the pad
-    for ref in ("C6", "C7", "C8", "C9", "C10", "C11", "C12", "C13", "C1", "C2", "C3", "C5", "C17", "C18", "D1"):
+    for ref in ("C6", "C7", "C8", "C9", "C10", "C11", "C12", "C13", "C1", "C2", "C3", "C5", "C17", "C18", "D1", "SW2", "SW3"):
         for p in bd.pads[(ref, "2")]:
             r.gnd_stub(p["cells"], True)
     sig = [n for n in nets if n not in POWER_ORDER and n != "GND" and len(nets[n]) > 1]
@@ -238,11 +301,18 @@ def route(bd):
     # 1. local nets, 2. power, 3. the remaining signals shortest first (USB first), 4. 3V3;
     #    all with rip-up and retry
     r.begin_maze()
-    jobs = [(net, dict(power=False, fcost=3.0)) for net in short]
+    early = [n for n in short if n in EARLY]         # around the charger / protection ICs
+    fails = r.route_all([(net, dict(power=False, fcost=3.0)) for net in early])
+    for net, cls, pads in TRUNKS:
+        trunk(bd, net, cls, pads)
+    r.begin_maze()          # those local nets and the trunks are fixed from here on
+    jobs = [(net, dict(power=False, fcost=3.0)) for net in short if net not in early]
     jobs += [(net, dict(power=True, fcost=3.0, via_cost=6.0)) for net in POWER_ORDER if net != "3V3"]
-    jobs += [(net, dict(power=False, fcost=3.0)) for net in ["USB_DN", "USB_DP"] + [n for n in rest if not n.startswith("USB_")]]
-    jobs.append(("3V3", dict(power=True, fcost=2.0, via_cost=5.0)))
-    fails = r.route_all(jobs)
+    jobs.append(("3V3", dict(power=True, max_cls="p", fcost=2.0, via_cost=5.0)))
+    # the long SPI bus (module -> J4 -> J5) has to cross the power trunks: route it while the front is still empty
+    first = ["USB_DN", "USB_DP"] + [n for n in rest if n.startswith("SPI_") or n == "SD_CS"]
+    jobs += [(net, dict(power=False, fcost=3.0)) for net in first + [n for n in rest if n not in first]]
+    fails += r.route_all(jobs)
     # 5. GND: every SMD pad gets a short stub to a via into the front plane
     r.mazing = False
     nostub = 0
@@ -256,11 +326,8 @@ def route(bd):
     seeds += [(10 * i, 10 * j) for j in range(1, 10) for i in range(1, 9)]
     seeds += [(46.0, 19.3), (52.0, 19.3), (55.5, 27.0), (43.0, 29.0), (50.5, 31.5), (49.0, 35.0), (43.0, 22.0)]
     n = stitch(bd, seeds)
-    import os
-    dbg = os.environ.get("KH_DEBUG_PNG")
-    if dbg:
-        r.png(dbg + "_b.png", B, 4)
-        r.png(dbg + "_f.png", F, 4)
+    for net, x, y in r.single:
+        print("single via on trunk %s at (%.2f, %.2f)" % (net, x, y))
     print("routing: %d failed connections, %d stitching vias, %.0f s" % (fails, n, time.time() - t0))
 
 

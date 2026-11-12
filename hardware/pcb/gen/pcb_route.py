@@ -43,11 +43,13 @@ class Router:
         self.netid = {}
         self.comps = {}        # net -> list of sets of cell ids
         self.padcell = {}      # cell id -> pad centre (x, y) for snapping track ends
+        self.padw = {}         # cell id -> smaller pad dimension
         self.tracks = []       # (net, layer, x1, y1, x2, y2, width)
         self.vias = []         # (net, x, y)
         self.grounded = set()  # cells that are solidly GND (for gnd stubs)
         self.log = []
-        self.verbose = True
+        self.verbose = False
+        self.single = []       # trunk layer changes that got only one via
         self.mazing = False
         self.requeue = []
         self.ripcount = {}
@@ -210,8 +212,10 @@ class Router:
         if not cells:
             iy, ix = self.node(*centre)
             cells = {self.cell(l, iy, ix) for l in layers}
+        pw = 2 * min(shape[3], shape[4]) if shape[0] == "rect" else (2 * shape[3] if shape[0] == "circle" else WIDTH["s"])
         for c in cells:
             self.padcell[c] = centre
+            self.padw[c] = pw
         if hole:
             self.stamp_bool(self.novia, ("circle", centre[0], centre[1], hole / 2), 0.25 + VIA_DRILL / 2 + MARGIN)
         if smd:
@@ -270,60 +274,6 @@ class Router:
                 lst.remove(comp)
                 base |= comp
 
-    def ascii(self, net, l, cx, cy, half=3.0):
-        """Text picture of the signal-class owner grid around a point (debugging)."""
-        sym = "123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        n = self.nid(net)
-        iy0, ix0 = self.node(cx - half, cy - half)
-        iy1, ix1 = self.node(cx + half, cy + half)
-        names = {v: k for k, v in self.netid.items()}
-        seen = {}
-        rows = ["   x %.2f..%.2f  y %.2f..%.2f  (* = %s, . free, # several nets)" % (
-            ix0 * PITCH, ix1 * PITCH, iy0 * PITCH, iy1 * PITCH, net)]
-        for iy in range(max(iy0, 0), min(iy1, self.ny - 1) + 1):
-            row = ""
-            for ix in range(max(ix0, 0), min(ix1, self.nx - 1) + 1):
-                v = int(self.own["s"][l, iy, ix])
-                if v == 0:
-                    row += "."
-                elif v == n:
-                    row += "*"
-                elif v < 0:
-                    row += "#"
-                else:
-                    seen.setdefault(v, sym[len(seen) % len(sym)])
-                    row += seen[v]
-            rows.append("   " + row)
-        rows.append("   " + " ".join("%s=%s" % (c, names[v]) for v, c in seen.items()))
-        return "\n".join(rows)
-
-    def png(self, path, layer, scale=4, x0=0.0, y0=0.0, x1=None, y1=None):
-        """Debug picture of the signal-class owner grid of one layer."""
-        import struct
-        import zlib
-        iy0, ix0 = self.node(x0, y0)
-        iy1, ix1 = self.node(self.w if x1 is None else x1, self.h if y1 is None else y1)
-        o = self.own["s"][layer, iy0:iy1 + 1, ix0:ix1 + 1]
-        pal = np.zeros((len(self.netid) + 2, 3), np.uint8)
-        rng = np.random.RandomState(7)
-        pal[1:-1] = rng.randint(90, 256, (len(self.netid), 3))
-        pal[0] = (40, 40, 40)
-        pal[-1] = (0, 0, 0)
-        if "GND" in self.netid:
-            pal[self.netid["GND"]] = (0, 90, 0)
-        img = pal[np.where(o < 0, len(self.netid) + 1, o)]
-        if layer == B:
-            pass
-        img = np.repeat(np.repeat(img, scale, axis=0), scale, axis=1)
-        raw = b"".join(b"\x00" + img[i].tobytes() for i in range(img.shape[0]))
-
-        def chunk(tag, data):
-            c = struct.pack(">I", len(data)) + tag + data
-            return c + struct.pack(">I", zlib.crc32(tag + data) & 0xffffffff)
-        with open(path, "wb") as f:
-            f.write(b"\x89PNG\r\n\x1a\n" + chunk(b"IHDR", struct.pack(">IIBBBBB", img.shape[1], img.shape[0], 8, 2, 0, 0, 0)) +
-                    chunk(b"IDAT", zlib.compress(raw, 6)) + chunk(b"IEND", b""))
-
     # ---------------------------------------------------------------- A* ---
     def _free(self, cls, net):
         n = self.nid(net)
@@ -331,7 +281,7 @@ class Router:
         return ((o == 0) | (o == n))
 
     def search(self, net, src, dst, power=False, layers=(F, B), fcost=2.0, via_cost=4.0,
-               allow_via=True, max_exp=1500000, via_target=None, soft=False):
+               allow_via=True, max_exp=1500000, via_target=None, soft=False, pent=(1.0, 1.25, 3.0), avoid=None):
         """A* from the cell set src to the cell set dst.  Returns list of (l, iy, ix).
         soft=True: only fixed copper blocks; crossing routed tracks costs SOFT per node
         (used to find out which nets to rip up)."""
@@ -347,10 +297,11 @@ class Router:
             viaok = (fpx[0] & fpx[1] & ~self.novia_fix & ~self.nearpad).tobytes()
         else:
             viaok = (fp[0] & fp[1] & ~self.novia & ~self.nearpad).tobytes()
+        if avoid is not None:
+            fs = fs & ~avoid
         free = fs.tobytes()
         if power:
             penb = np.where(self._free("w", net), 0, np.where(fp, 1, 2)).astype(np.uint8).tobytes()
-            pent = (1.0, 1.25, 3.0)
         dstb = bytearray(2 * ny * nx)
         xs0 = ys0 = 10 ** 9
         xs1 = ys1 = -1
@@ -455,14 +406,8 @@ class Router:
             return "s"
         n = self.nid(net)
         for c in ("w", "p"):
-            o = self.own[c]
-            ok = True
-            for dy in (-1, 0, 1):          # node and its neighbours (covers diagonals)
-                for dx in (-1, 0, 1):
-                    v = o[l, min(max(iy + dy, 0), self.ny - 1), min(max(ix + dx, 0), self.nx - 1)]
-                    if v != 0 and v != n:
-                        ok = False
-            if ok:
+            v = self.own[c][l, iy, ix]
+            if v == 0 or v == n:
                 return c
         return "s"
 
@@ -485,14 +430,18 @@ class Router:
                 continue
             if any(op[tl, p[1], p[2]] not in (0, n) for p in nodes):
                 continue
+            if any(a[1] != b[1] and a[2] != b[2] and (op[tl, a[1], b[2]] not in (0, n) or op[tl, b[1], a[2]] not in (0, n))
+                   for a, b in zip(nodes, nodes[1:])):
+                continue
             self.add_via(net, ix * PITCH, iy * PITCH)
             for p, q in zip(nodes, nodes[1:]):
                 seg = (net, tl, p[2] * PITCH, p[1] * PITCH, q[2] * PITCH, q[1] * PITCH, WIDTH["p"])
                 self.tracks.append(seg)
                 self.stamp(("seg",) + seg[2:6] + (WIDTH["p"] / 2,), [tl], net)
             return
+        self.single.append((net, path[i][2] * PITCH, path[i][1] * PITCH))
 
-    def commit(self, net, path, power=False, max_cls="w", snap=True):
+    def commit(self, net, path, power=False, max_cls="w", snap=True, twin=False):
         """Turn a node path into tracks / vias, stamp it and add it to the net."""
         order = ["s", "p", "w"]
         cells = set()
@@ -507,6 +456,8 @@ class Router:
         for i, (a, b) in enumerate(zip(pts, pts[1:])):
             if a[0] != b[0]:
                 self.add_via(net, a[1], a[2])
+                if twin:
+                    self._twin_via(net, path, i)
                 continue
             cls = a[3] if order.index(a[3]) < order.index(b[3]) else b[3]
             if segs:
@@ -522,14 +473,17 @@ class Router:
                 pc = self.padcell.get(self.cell(l, iy, ix))
                 x, y = ix * PITCH, iy * PITCH
                 if pc and (abs(pc[0] - x) > 1e-6 or abs(pc[1] - y) > 1e-6):
-                    self.tracks.append((net, l, x, y, pc[0], pc[1], WIDTH["s"]))
+                    w = WIDTH["s"]
+                    if power:      # inside the pad: as wide as the track that arrives, at most the pad
+                        w = max(w, min(WIDTH[pts[end][3]], self.padw[self.cell(l, iy, ix)]))
+                    self.tracks.append((net, l, x, y, pc[0], pc[1], w))
         for l, x1, y1, x2, y2, cls in segs:
             w = WIDTH[cls]
             self.tracks.append((net, l, x1, y1, x2, y2, w))
             self.stamp(("seg", x1, y1, x2, y2, w / 2), [l], net)
         return self.add_comp(net, cells)
 
-    def route_net(self, net, power=False, first=None, **kw):
+    def route_net(self, net, power=False, max_cls="w", **kw):
         """Connect all components of a net.  Returns number of failed connections."""
         fails = 0
         lst = self.comps.get(net, [])
@@ -549,6 +503,8 @@ class Router:
             if path is None and self.mazing and self.total_rips < MAX_RIPS and self.ripcount.get(net, 0) < 12:
                 sp = self.search(net, start, dst, power=power, soft=True, **kw)
                 bl = self.blockers(net, sp) if sp else []
+                if self.verbose and not bl:
+                    print("  %-12s soft search: %s, exp %d" % (net, "no blockers" if sp else "no path", self.last_exp), flush=True)
                 if bl:
                     self.ripcount[net] = self.ripcount.get(net, 0) + 1
                     self.total_rips += len(bl)
@@ -566,10 +522,9 @@ class Router:
                 other = min((c for c in lst if c is not start), key=len)
                 l, iy, ix = self.uncell(next(iter(other)))
                 self.log.append("FAILED %s: component at (%.2f, %.2f) layer %d" % (net, ix * PITCH, iy * PITCH, l))
-                self.log.append(self.ascii(net, l, ix * PITCH, iy * PITCH))
                 lst.remove(other)
                 continue
-            self.commit(net, path, power=power)
+            self.commit(net, path, power=power, max_cls=max_cls)
         return fails
 
     # ------------------------------------------------------------ rip-up ---
