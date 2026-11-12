@@ -54,8 +54,12 @@ tüketmez. GPIO3'te okunan gerilim pil geriliminin yarısıdır.
   kod yükleme ESP32 kartının kendi USB-C girişinden yapılır. Şarj
   modülünde veri hattı yoktur.
 - Kod yüklerken anahtarı kapalı tut; kart o sırada bilgisayardan beslenir.
-- Şarj ederken cihazı kapat. Bu modülde güç yolu yok; cihaz açıkken şarj
-  akımının bir kısmı cihaza gider ve şarj "doldu" durumuna geçemeyebilir.
+- Cihaz kapalıyken şarj kendiliğinden biter: akım 100 mA'in altına düşünce
+  modül şarjı keser ve ışık renk değiştirir. Pil yaklaşık 4,05 V'un altına
+  inmedikçe yeniden başlamaz. Gece şarjı için cihazı kapalı bırak.
+- Cihaz açıkken de şarj edilebilir ama bu modülde güç yolu yok; cihazın
+  çektiği akım yüzünden şarj "doldu" durumuna geçemeyebilir ve pil sürekli
+  4,2 V'ta tutulur. Tamamen boşalmış pili cihaz kapalıyken şarj et.
 - Şarj akımı 1 A (modülün varsayılanı). 3200 mAh pil için uygundur.
   Bilgisayar portu yerine telefon şarj adaptörü kullan. USB-C'den USB-C'ye
   kabloyla şarj başlamazsa USB-A'dan USB-C'ye kablo kullan.
