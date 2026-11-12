@@ -14,7 +14,7 @@
 | Depolama | microSD (SPI) | Ekran modülünün üzerindeki yuva. LCD ile aynı SPI hattında, ayrı CS pini (bkz. [pin planı](pinout.md)). |
 | Kontroller | Yön tuşu (4x 6x6 tact) + A, B, Start, Select | Menü ve 2D oyunlar için yön tuşu ana kontrol. PS2 tipi analog joystick isteğe bağlı: PCB'de footprint bırakılır (ADC1, GPIO1-2), kasadan ~10 mm taşar. |
 | Güç anahtarı | Sürgülü anahtar, regülatörün EN pininde | Anahtar akım taşımaz (50 mA'lik). Kapalıyken kaçak ~35 µA. |
-| Kasa | PETG veya ASA | PLA değil (55-60°C'de yumuşar). Dikey düzen: ekran üstte, kontroller altta, batarya alttaki çıkıntıda. Tahmini ölçü ~92 x 135 x 22 mm (pil tarafında ~25 mm); ekran kartı 86 mm olduğu için genişlik buna göre. |
+| Kasa | PETG veya ASA, yaklaşık 94 x 130 x 20 mm | PLA değil (55-60°C'de yumuşar). Dikey düzen: üstte ekran, altında butonlar, en altta pil bölmesi. Kart 90 x 100 mm ve kasanın üst 100 mm'sinde durur; alttaki ~28 mm'lik bölmeye 18650 yatay girer (pil 18,5 mm çap + boşluk + duvarlar ≈ 24 mm). Yön tuşu merkezi alt kenardan ~48 mm (Gameboy'a yakın). Hoparlör (20x30 mm) pilin yanına. Ölçüler tahmini; kasa çizilince kesinleşir. |
 | Ekran koruması | 1-1,5 mm şeffaf akrilik lens + koruyucu film | Lens kasaya oturur, ekrana değmez (0,3-0,5 mm boşluk). Ekran kartı köpük conta üstünde, 4 köşeden M2 vidayla kasaya bağlı. Ön çerçeve ekrandan yüksek. |
 | Buton hissi | Prototipte tact switch; finalde kapak + silikon katman | Gerçek konsol tipi silikon zar Türkiye'de bulunamadı; PCB'ye ileride karbon pad seçeneği eklenebilir. |
 
