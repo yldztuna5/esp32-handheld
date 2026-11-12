@@ -23,6 +23,7 @@
 - [Güç ve batarya güvenliği](docs/power-safety.md)
 - [Parça listesi](docs/parts.md)
 - [Pin planı](docs/pinout.md)
+- [Modüllü sürüm (delikli kart)](docs/module-build.md)
 
 ## Yol haritası
 - [x] Gereksinimler ve temel parça kararları
@@ -32,8 +33,9 @@
 - [ ] Breadboard: ESP32-S3 + ekran + yön tuşu + butonlar + ses
 - [ ] Firmware: launcher iskeleti ve ilk uygulama
 - [x] KiCad şema (kod ile üretiliyor: `hardware/pcb/gen/`)
+- [ ] Modüllü sürüm: delikli kartta montaj ([plan](docs/module-build.md))
 - [ ] KiCad PCB yerleşimi (v1 taslak hazır, sipariş öncesi gözden geçirilecek)
 - [ ] Kasa tasarımı (PCB ölçülerine göre)
-- [ ] PCB v1 sipariş ve güç devresi testi (bataryasız)
+- [ ] PCB v1 sipariş (dizgi maliyeti nedeniyle ertelendi) ve güç devresi testi (bataryasız)
 - [ ] Montaj ve tam sistem testi
 - [ ] PCB v2 (gerekirse)
